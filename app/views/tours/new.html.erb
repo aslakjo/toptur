@@ -1,0 +1,29 @@
+<h1>New tour</h1>
+
+<% form_for(@tour) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :title %><br />
+    <%= f.text_field :title %>
+  </p>
+  <p>
+    <%= f.label :body %><br />
+    <%= f.text_area :body %>
+  </p>
+
+  <p>
+    <%= f.label :user %>
+    <select name="tour[user_id]">
+      <option value="-1">Velg en</option>
+      <% User.find(:all).each do |user| %>
+        <option value="<%= user.id %>"><%= user %></option>
+      <% end %>
+    </select>
+  </p>
+  <p>
+    <%= f.submit "Create" %>
+  </p>
+<% end %>
+
+<%= link_to 'Back', tours_path %>
