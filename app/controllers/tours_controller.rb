@@ -1,3 +1,4 @@
+
 class ToursController < ApplicationController
   # GET /tours
   # GET /tours.xml
@@ -13,8 +14,38 @@ class ToursController < ApplicationController
   # GET /tours/1
   # GET /tours/1.xml
   def show
+    @map = GMap.new "map_div"
+    @map.control_init :large_map => true, :map_type => true
+    @map.center_zoom_init([61.971505561437446, 7.2461700439453125],12)
+    @map.set_map_type_init(Variable.new("G_PHYSICAL_MAP"))
+ 
+    @map.record_init "map.enableScrollWheelZoom();"
+    
+    
+    @map.event_init @map, :click, "click_handler"
+    
+    @map.record_init "initializeMapHandler(map);"
+
     @tour = Tour.find(params[:id])
 
+    path = []
+    @tour.pointsGoingUp.each do |point|
+      path << [point.lat, point.lng]
+      @map.overlay_init GMarker.new([point.lat, point.lng])
+    end
+    if not path.empty?
+      @map.overlay_init GPolyline.new(path)
+    end
+
+    path = []
+    @tour.pointsGoingDown.each do |point|
+      path << [point.lat, point.lng]
+      @map.overlay_init GMarker.new([point.lat, point.lng])
+    end
+    if not path.empty?
+      @map.overlay_init GPolyline.new(:points => path)
+    end
+    
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @tour }

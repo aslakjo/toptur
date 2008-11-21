@@ -1,4 +1,13 @@
+<head>
+  <%= GMap.header %>
+  <%= @map.to_html %>
+
+</head>
+
 <h1>New tour</h1>
+
+
+
 
 <% form_for(@tour) do |f| %>
   <%= f.error_messages %>

@@ -9,11 +9,27 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20081116174923) do
+ActiveRecord::Schema.define(:version => 20081116194427) do
+
+  create_table "paths", :force => true do |t|
+    t.integer  "tour_id"
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "points", :force => true do |t|
+    t.string   "lat"
+    t.string   "lng"
+    t.integer  "path_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "tours", :force => true do |t|
     t.string   "title"
     t.text     "body"
+    t.integer  "path_id"
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
