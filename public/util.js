@@ -11,6 +11,13 @@ function initializeMapHandler(referenceToMap){
     currentRoute.onAddPoint = updateMap;
 };
 
+function registerField(field){
+    up = new Route(field.value)
+
+    map.addOverlay(new GPolyline(up.points))
+}
+
+
 function updateMap(points, lastPoint){
     if(points.length > 1){
         try{
@@ -49,19 +56,42 @@ function g(id){
     return document.getElementById(id);
 }
 
+function f(name){
+    return document.getElementsByName(name);
+}
+
 function saveCurrentRoute(mode){
+    console.debug(currentRoute)
     if(mode == EditMode.climb)
-        g("up").innerHTML = currentRoute.toJSON();
+        g("tour_pointsGoingUp").value = currentRoute.toJSON();
     else if(mode == EditMode.down)
-        g("down").innerHTML = currentRoute.toJSON();
+        g("tour_pointsGoingDown").value = currentRoute.toJSON();
 
 
 };
 
 
 
-function Route(){
-    this.points = [];
+function Route(fromJson){
+    this.points = []
+    if(fromJson != undefined){
+        try
+        {
+            
+            pointsArray = eval(fromJson)
+            for(pointIndex in pointsArray){
+                point = pointsArray[pointIndex]
+                if(point.length == 2){
+                    this.points = this.points.concat(new GLatLng(point[0], point[1]))
+                }
+                    
+            }
+        }catch(e)
+        {
+            console.error(e)
+        }
+    }
+
     this.onAddPoint = null;
 
     this.addPoint = function(latlng){
@@ -91,6 +121,8 @@ function Route(){
         jsonString += "]"
         return jsonString;
     };
+
+
 };
 
 var setMode = function(mode){
