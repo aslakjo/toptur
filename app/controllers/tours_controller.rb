@@ -17,7 +17,8 @@ class ToursController < ApplicationController
     @map = constructMapController
 
     @tour = Tour.find(params[:id])
-
+    @map.record_init "registerField(g('tour_pointsGoingUp'));"
+    @map.record_init "registerField(g('tour_pointsGoingDown'));"
     
     
     respond_to do |format|
@@ -42,8 +43,9 @@ class ToursController < ApplicationController
     @map = constructMapController
 
     @map.record_init "registerField(g('tour_pointsGoingUp'));"
+    @map.record_init "registerField(g('tour_pointsGoingDown'));"
     @tour = Tour.find(params[:id])
-    puts params[:pointsGoingDown]
+    
     
   end
 
