@@ -1,0 +1,13 @@
+
+  <div id="climbButton" onclick="setMode(EditMode.climb)">
+    Climb
+  </div>
+  <div id="downButton" onclick="setMode(EditMode.down)">
+    Skiing down
+  </div>
+  <div id="saveButton" onclick="saveCurrentRoute(currentMode)">
+    Save
+  </div>
+
+  <%= f.hidden_field :pointsGoingUp %>
+  <%= f.hidden_field :pointsGoingDown %>

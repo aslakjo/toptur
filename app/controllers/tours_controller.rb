@@ -30,7 +30,11 @@ class ToursController < ApplicationController
   # GET /tours/new
   # GET /tours/new.xml
   def new
+    @map = constructMapController
     @tour = Tour.new
+
+    @map.record_init "registerField(g('tour_pointsGoingUp'));"
+    @map.record_init "registerField(g('tour_pointsGoingDown'));"
 
     respond_to do |format|
       format.html # new.html.erb

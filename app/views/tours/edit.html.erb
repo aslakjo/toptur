@@ -12,25 +12,14 @@
 
 
 
-<div id="climbButton" onclick="setMode(EditMode.climb)">
-  Climb
-</div>
-<div id="downButton" onclick="setMode(EditMode.down)">
-  Skiing down
-</div>
-<div id="saveButton" onclick="saveCurrentRoute(currentMode)">
-  Save
-</div>
+
 
 
 
 <% form_for(@tour) do |f| %>
   <%= f.error_messages %>
 
-
-  <%= f.hidden_field :pointsGoingUp %>
-  <%= f.hidden_field :pointsGoingDown %>
-
+  <%=  render :partial => 'map', :locals => {:f => f} %>
   <p>
     <%= f.label :title %><br />
     <%= f.text_field :title %>
@@ -39,7 +28,7 @@
     <%= f.label :body %><br />
     <%= f.text_area :body %>
   </p>
-  
+
 
 
   <p>
