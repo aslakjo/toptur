@@ -19,11 +19,11 @@ ActiveRecord::Schema.define(:version => 20081116194427) do
   end
 
   create_table "points", :force => true do |t|
-    t.string   "lat"
-    t.string   "lng"
     t.integer  "path_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "lat"
+    t.string   "lng"
   end
 
   create_table "tours", :force => true do |t|

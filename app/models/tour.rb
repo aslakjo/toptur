@@ -7,17 +7,20 @@ class Tour < ActiveRecord::Base
 
 
   def pointsGoingUp=(value)
-    upPath = paths(:name => "up")[0]
+    
+    upPath = paths.find_by_name("up")
     if(!upPath)
-      upPath = Path.new :tour => this
+      upPath = Path.create(:tour_id => :this, :name => "up")
+      paths << upPath
     end
     upPath.points.clear
 
     JSON.parse(value).each do |point|
       if(point.length > 1)
-        upPath.points << Point.new(:lat => point[0].to_s, :lng => point[0].to_s)
+        upPath.points << Point.create(:lat => point[0].to_s, :lng => point[1].to_s)       
       end
     end
+    
 
     upPath.save!
   end
@@ -37,20 +40,21 @@ class Tour < ActiveRecord::Base
 
 
   def pointsGoingDown=(value)
-    downPath = paths(:name => "down")[0]
-    if(downPath == nil)
-      downPath = Path.create :tour => this
+    downPath = paths.find_by_name("down")
+    if(!downPath)
+      downPath = Path.create(:tour_id => :this, :name =>"down")
+      paths << downPath
     end
     
     downPath.points.clear
 
     JSON.parse(value).each do |point|
       if(point.length > 1)
-        downPath.points << Point.create(:lat => point[0].to_s, :lng => point[0].to_s, :path => downPath)
+        downPath.points << Point.create(:lat => point[0].to_s, :lng => point[1].to_s)
 
       end
     end
-    
+    puts downPath.inspect
     downPath.save!
   end
 
