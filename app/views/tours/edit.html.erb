@@ -27,8 +27,9 @@
 <% form_for(@tour) do |f| %>
   <%= f.error_messages %>
 
-  <%= f.text_field :pointsGoingUp %>
-  <%= f.text_field :pointsGoingDown %>
+
+  <%= f.hidden_field :pointsGoingUp %>
+  <%= f.hidden_field :pointsGoingDown %>
 
   <p>
     <%= f.label :title %><br />

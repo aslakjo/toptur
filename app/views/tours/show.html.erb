@@ -27,10 +27,10 @@
   <%= @tour.user %>
 </p>
 
-<div style="display:none;">
-  <%= text_field :tour, :pointsGoingDown %>
-  <%= text_field :tour, :pointsGoingUp %>
-</div>
+
+  <%= hidden_field :tour, :pointsGoingDown %>
+  <%= hidden_field :tour, :pointsGoingUp %>
+
 
 <%= link_to 'Edit', edit_tour_path(@tour) %> |
 <%= link_to 'Back', tours_path %>
