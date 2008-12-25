@@ -1,0 +1,40 @@
+<%#
+# To change this template, choose Tools | Templates
+# and open the template in the editor.
+%>
+<head>
+<%= GMap.header %>
+  <%= javascript_include_tag 'util.js' %>
+  <%= @map.to_html %>
+
+  <% javascript_tag do %>
+    var upColor = "#0000ff"
+    var downColor = "#ff0000"
+  <% end %>
+
+</head>
+<body>
+  <div>
+
+  </div>
+
+<p>
+
+  <%= @map.div(:width => 900, :height => 500) %>
+  <b> Tours: <br/></b>
+
+<% @tours.each do |tour| %>
+  <p>
+    <h3>
+      <%= tour.title %>
+    </h3>
+    <%=  tour.body%>
+    <br/>
+    --<%=  tour.user%>
+  </p>
+
+<%  end %>
+
+</p>
+
+</body>
