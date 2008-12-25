@@ -6,9 +6,17 @@ class Tour < ActiveRecord::Base
   validates_presence_of :user, :title, :body
 
 
+  def upPath
+    paths.find_by_name("up")
+  end
+
+  def downPath
+    paths.find_by_name("down")
+  end
+
   def pointsGoingUp=(value)
     
-    upPath = paths.find_by_name("up")
+    upPath = self.upPath
     if(!upPath)
       upPath = Path.create(:tour_id => :this, :name => "up")
       paths << upPath
@@ -40,7 +48,7 @@ class Tour < ActiveRecord::Base
 
 
   def pointsGoingDown=(value)
-    downPath = paths.find_by_name("down")
+    downPath = self.downPath
     if(!downPath)
       downPath = Path.create(:tour_id => :this, :name =>"down")
       paths << downPath

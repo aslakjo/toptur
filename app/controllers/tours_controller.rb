@@ -2,6 +2,9 @@
 class ToursController < ApplicationController
   # GET /tours
   # GET /tours.xml
+  @@up_color = "#0000FF"
+  @@down_color = "#ff0000"
+
   def index
     @tours = Tour.find(:all)
 
@@ -17,8 +20,8 @@ class ToursController < ApplicationController
     @map = constructMapController
 
     @tour = Tour.find(params[:id])
-    @map.record_init "registerField(g('tour_pointsGoingUp'));"
-    @map.record_init "registerField(g('tour_pointsGoingDown'));"
+    @map.record_init "registerField(g('tour_pointsGoingUp'), EditMode.climb);"
+    @map.record_init "registerField(g('tour_pointsGoingDown'), EditMode.down);"
     
     
     respond_to do |format|
@@ -33,9 +36,9 @@ class ToursController < ApplicationController
     @map = constructMapController
     @tour = Tour.new
 
-    @map.record_init "registerField(g('tour_pointsGoingUp'));"
-    @map.record_init "registerField(g('tour_pointsGoingDown'));"
 
+    @map.record_init "registerField(g('tour_pointsGoingUp'), EditMode.climb);"
+    @map.record_init "registerField(g('tour_pointsGoingDown'), EditMode.down);"
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @tour }
@@ -46,8 +49,9 @@ class ToursController < ApplicationController
   def edit
     @map = constructMapController
 
-    @map.record_init "registerField(g('tour_pointsGoingUp'));"
-    @map.record_init "registerField(g('tour_pointsGoingDown'));"
+
+    @map.record_init "registerField(g('tour_pointsGoingUp'), EditMode.climb);"
+    @map.record_init "registerField(g('tour_pointsGoingDown'), EditMode.down);"
     @tour = Tour.find(params[:id])
     
     
