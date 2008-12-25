@@ -103,6 +103,19 @@ class ToursController < ApplicationController
     end
   end
 
+  def all
+    @map = constructMapController
+    @tours = Tour.find :all
+
+    @tours.each do |tour|
+      @map.overlay_init(GMarker.new(tour.upPath.to_array.last, :title => tour.title))
+      @map.overlay_init(GPolyline.new(tour.upPath.to_array, @@up_color, 2, 100))
+      @map.overlay_init(GPolyline.new(tour.downPath.to_array, @@down_color, 2, 100))
+    end
+  end
+
+  private
+
   def constructMapController
     @map = GMap.new "map_div"
     @map.control_init :large_map => true, :map_type => true

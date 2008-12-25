@@ -34,16 +34,11 @@ class Tour < ActiveRecord::Base
   end
 
   def pointsGoingUp
-    paths.each do |path|
-      if path.name == "up"
-        json = "["
-        path.points.each do |point|
-          json += "[" +point.lat + "," + point.lng + "],"
-        end
-        return json + "[]]"
-      end
+    json = "["
+    upPath.points.each do |point|
+      json += "[" +point.lat + "," + point.lng + "],"
     end
-    return []
+    return json + "[]]"
   end
 
 
@@ -62,22 +57,18 @@ class Tour < ActiveRecord::Base
 
       end
     end
-    puts downPath.inspect
+    
     downPath.save!
   end
 
   def pointsGoingDown
-    paths.each do |path|
-      if path.name == "down"
-        json = "["
-        path.points.each do |point|
-          json += "[" +point.lat + "," + point.lng + "],"
-        end
-        return json + "[]]"
-      end
-      
+    
+    json = "["
+    downPath.points.each do |point|
+      json += "[" +point.lat + "," + point.lng + "],"
     end
-    return []
+    return json + "[]]"
+    
   end
 
 end

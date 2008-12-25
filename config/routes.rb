@@ -2,6 +2,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :users
 
   map.resources :tours
+  map.connect "all/tours", :controller=>'tours', :action=>'all'
 
   # The priority is based upon order of creation: first created -> highest priority.
 
