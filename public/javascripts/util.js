@@ -31,14 +31,11 @@ function registerField(field, mode){
 function updateMap(points){
     routePolyline = routes[currentMode]
     if(points.length > 1){
-        try{
-            if(routePolyline != null)
-                map.removeOverlay(routePolyline);
-        }catch(e){
-            console.debug(e)
+        if(routePolyline != null)
+        {
+            map.removeOverlay(routePolyline);
         }
-
-
+        
         routePolyline = constructPolyline(points, modeColor(currentMode));
         
         map.addOverlay(routePolyline);
@@ -46,12 +43,12 @@ function updateMap(points){
 };
 
 function modeColor(mode){
-   if(mode == EditMode.down)
-       return downColor;
-   else if(mode == EditMode.climb)
-       return upColor;
-   else
-       return "#ffffff";
+    if(mode == EditMode.down)
+        return downColor;
+    else if(mode == EditMode.climb)
+        return upColor;
+    else
+        return "#ffffff";
 
 };
 
@@ -69,7 +66,6 @@ function constructPolyline(points, colorCode){
 }
 
 function map_click(latlng){
-    console.log("map_click ", currentRoute.points);
     currentRoute.addPoint(latlng);
 
     if(currentRoute.points.length == 1)
@@ -77,7 +73,7 @@ function map_click(latlng){
 };
 
 function overlay_click(overlay, latlng){
-    console.log("overlay_click", overlay, latlng);
+;
 };
 
 function g(id){
@@ -89,7 +85,6 @@ function f(name){
 }
 
 function saveCurrentRoute(mode){
-    console.debug(currentRoute)
     if(mode == EditMode.climb)
     {
         g("tour_pointsGoingUp").value = currentRoute.toJSON();
@@ -104,8 +99,6 @@ function saveCurrentRoute(mode){
     }
 
     updateMap(routes[mode])
-
-
 };
 
 function fetchRoute(mode){
@@ -115,7 +108,7 @@ function fetchRoute(mode){
     return routes[mode];
 }
 
-var setMode = function(new_mode){
+function setMode(new_mode){
     if(currentMode != null){
         saveCurrentRoute(currentMode);
     }
@@ -140,7 +133,7 @@ function resetMap(){
 
 
 
-var click_handler=function(overlay, latlng, overlay_latlng){
+function click_handler(overlay, latlng, overlay_latlng){
     if(latlng != null)
     {
         map_click(latlng);
@@ -154,18 +147,12 @@ var click_handler=function(overlay, latlng, overlay_latlng){
 function Route(fromJson){
     this.points = []
     if(fromJson != undefined){
-        try
-        {
-            pointsArray = eval(fromJson)
-            for(pointIndex in pointsArray){
-                point = pointsArray[pointIndex]
-                if(point.length == 2){
-                    this.points = this.points.concat(new GLatLng(point[0], point[1]))
-                }
+        pointsArray = eval(fromJson)
+        for(pointIndex in pointsArray){
+            point = pointsArray[pointIndex]
+            if(point.length == 2){
+                this.points = this.points.concat(new GLatLng(point[0], point[1]))
             }
-        }catch(e)
-        {
-            console.error(e)
         }
     }
 
