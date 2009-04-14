@@ -4,8 +4,7 @@ class Tour < ActiveRecord::Base
   belongs_to :user
   has_many :paths
   validates_presence_of :user, :title, :body
-
-
+  
   def upPath
     paths.find_by_name("up")
   end
@@ -15,7 +14,6 @@ class Tour < ActiveRecord::Base
   end
 
   def pointsGoingUp=(value)
-    
     upPath = self.upPath
     if(!upPath)
       upPath = Path.create(:tour_id => :this, :name => "up")
@@ -28,17 +26,17 @@ class Tour < ActiveRecord::Base
         upPath.points << Point.create(:lat => point[0].to_s, :lng => point[1].to_s)       
       end
     end
-    
-
     upPath.save!
   end
 
   def pointsGoingUp
     json = "["
-    upPath.points.each do |point|
-      json += "[" +point.lat + "," + point.lng + "],"
+    if upPath
+      upPath.points.each do |point|
+        json += "[" +point.lat + "," + point.lng + "],"
+      end
     end
-    return json + "[]]"
+    json + "[]]"
   end
 
 
@@ -62,13 +60,13 @@ class Tour < ActiveRecord::Base
   end
 
   def pointsGoingDown
-    
     json = "["
-    downPath.points.each do |point|
-      json += "[" +point.lat + "," + point.lng + "],"
+    if downPath
+      downPath.points.each do |point|
+        json += "[" +point.lat + "," + point.lng + "],"
+      end
     end
-    return json + "[]]"
-    
+    json + "[]]"
   end
 
 end

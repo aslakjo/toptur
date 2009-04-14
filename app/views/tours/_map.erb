@@ -1,19 +1,21 @@
 
 
-  <% javascript_tag do %>
-    var upColor = "#0000ff"
-    var downColor = "#ff0000"
-  <% end %>
-  
-  <div id="climbButton" onclick="setMode(EditMode.climb)">
-    Climb
+<% javascript_tag do %>
+  var upColor = "#0000ff"
+  var downColor = "#ff0000"
+<% end %>
+
+<div id="buttons">
+  <div id="climbButton" class="button" onclick="setMode(EditMode.climb)">
+    Edit up
   </div>
-  <div id="downButton" onclick="setMode(EditMode.down)">
-    Skiing down
+  <div id="downButton" class="button" onclick="setMode(EditMode.down)">
+    Edit down
   </div>
-  <div id="saveButton" onclick="saveCurrentRoute(currentMode)">
+  <div id="saveButton" class="button" onclick="saveCurrentRoute(currentMode)">
     Save
   </div>
+</div>
 
-  <%= f.hidden_field :pointsGoingUp %>
-  <%= f.hidden_field :pointsGoingDown %>
+<%= f.hidden_field :pointsGoingUp %>
+<%= f.hidden_field :pointsGoingDown %>

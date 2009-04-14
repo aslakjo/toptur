@@ -35,6 +35,7 @@ class ToursController < ApplicationController
   def new
     @map = constructMapController
     @tour = Tour.new
+    @tour.paths = []
 
 
     @map.record_init "registerField(g('tour_pointsGoingUp'), EditMode.climb);"

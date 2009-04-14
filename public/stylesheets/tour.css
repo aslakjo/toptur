@@ -1,0 +1,95 @@
+#map
+{
+  width:900px;
+  border: 20px solid #288A98;
+}
+
+
+h1
+{
+  margin-left: 10px;
+  font-size: 3em;
+  color: #EFF0D8;
+}
+
+#climbButton
+{
+}
+
+#downButton
+{
+}
+
+#saveButton
+{
+}
+
+#buttons
+{
+  position: absolute;
+  left: 20px;
+  margin-top: -41px;
+}
+
+.button
+{
+  padding: 5px;
+  margin: 5px;
+  float: left;
+
+  cursor: pointer;
+
+  color: #EFF0D8;
+  font-size: 1.2em;
+  font-variant: small-caps;
+
+  background: #288A98;
+  width: 50px;
+  height: 50px;
+}
+
+.main_content
+{
+  margin-left: 400px;
+  padding: 10px;
+  width: 479px;
+
+  background: #288A98;
+}
+
+.main_content input, .main_content textarea
+{
+  border: 0;
+  padding: 4px;
+
+  background: #EFF0D8;
+}
+
+.footer
+{
+  height: 50px;
+}
+
+a:visited, a
+{
+  color: #EFF0D8
+}
+
+p.author
+{
+  position:relative;
+  left: 10px;
+  top: -10px;
+  height:0;
+  font-size:  1.2em;
+  text-transform: capitalize;
+
+  color: #C8CB77;
+}
+
+p.description_body
+{
+  color: #EFF0D8;
+}
+
+# #4DBB9D #C8CB77 #EFF0D8 #6ACAD8 #288A98

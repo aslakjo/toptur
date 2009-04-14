@@ -6,35 +6,36 @@
 
 </head>
 
-<h1>Editing tour</h1>
 
-<%= @map.div(:width => 900, :height => 500) %>
-
-
-
+<div id="map">
+  <%= @map.div(:width => 900, :height => 500) %>
+</div>
 
 
 
+<div class="main_content">
+  
+  <% form_for(@tour) do |f| %>
+    <%= f.error_messages %>
 
-<% form_for(@tour) do |f| %>
-  <%= f.error_messages %>
-
-  <%=  render :partial => 'map', :locals => {:f => f} %>
-  <p>
-    <%= f.label :title %><br />
-    <%= f.text_field :title %>
-  </p>
-  <p>
-    <%= f.label :body %><br />
-    <%= f.text_area :body %>
-  </p>
+    <%=  render :partial => 'map', :locals => {:f => f} %>
+    <h1><%= @tour.title %></h1>
+    <p>
+      <%= f.label :title %><br />
+      <%= f.text_field :title %>
+    </p>
+    <p>
+      <%= f.label :body %><br />
+      <%= f.text_area :body %>
+    </p>
 
 
 
-  <p>
-    <%= f.submit "Update" %>
-  </p>
-<% end %>
+    <p>
+      <%= f.submit "Update" %>
+    </p>
+  <% end %>
 
-<%= link_to 'Show', @tour %> |
-<%= link_to 'Back', tours_path %>
+  <%= link_to 'Show', @tour %> |
+  <%= link_to 'Back', tours_path %>
+</div>

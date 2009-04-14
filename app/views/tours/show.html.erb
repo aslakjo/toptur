@@ -1,5 +1,5 @@
 <head>
-  
+
   <%= GMap.header %>
   <%= javascript_include_tag 'util.js' %>
   <%= @map.to_html %>
@@ -13,30 +13,24 @@
 </head> 
 
 
-<p>
-  
-  <h2><%=h @tour.title %></h2>
-</p>
-<p>
+
+<div id="map">
   <%= @map.div(:width => 900, :height => 500) %>
-  
+</div>
 
- 
-</p>
-<p>
-  <b>Body:</b><br/>
-  <%=h @tour.body %>
-</p>
+<div class="main_content">
+  <h1><%=h @tour.title %></h1>
+  <p class="author">
+    <%= @tour.user %>
+  </p>
 
-<p>
-  <b>Author:</b>
-  <%= @tour.user %>
-</p>
-
-
+  <p class="description_body" >
+    <%=h @tour.body %>
+  </p>
   <%= hidden_field :tour, :pointsGoingDown %>
   <%= hidden_field :tour, :pointsGoingUp %>
 
 
-<%= link_to 'Edit', edit_tour_path(@tour) %> |
-<%= link_to 'Back', tours_path %>
+  <%= link_to 'Edit', edit_tour_path(@tour) %> |
+  <%= link_to 'Back', tours_path %>
+</div>
